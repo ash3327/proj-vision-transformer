@@ -1,0 +1,60 @@
+T2T_ViT(
+  (t2t): T2T_ViT(
+    (tokens_to_token): T2T_module(
+      (soft_split0): Unfold(kernel_size=(7, 7), dilation=1, padding=(2, 2), stride=(4, 4))
+      (soft_split1): Unfold(kernel_size=(3, 3), dilation=1, padding=(1, 1), stride=(2, 2))
+      (soft_split2): Unfold(kernel_size=(3, 3), dilation=1, padding=(1, 1), stride=(2, 2))
+      (attention1): Token_performer(
+        (kqv): Linear(in_features=147, out_features=192, bias=True)
+        (dp): Dropout(p=0.1, inplace=False)
+        (proj): Linear(in_features=64, out_features=64, bias=True)
+        (norm1): LayerNorm((147,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (mlp): Sequential(
+          (0): Linear(in_features=64, out_features=64, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=64, out_features=64, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (attention2): Token_performer(
+        (kqv): Linear(in_features=576, out_features=192, bias=True)
+        (dp): Dropout(p=0.1, inplace=False)
+        (proj): Linear(in_features=64, out_features=64, bias=True)
+        (norm1): LayerNorm((576,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (mlp): Sequential(
+          (0): Linear(in_features=64, out_features=64, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=64, out_features=64, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (project): Linear(in_features=576, out_features=384, bias=True)
+    )
+    (pos_drop): Dropout(p=0.0, inplace=False)
+    (blocks): ModuleList(
+      (0-13): 14 x Block(
+        (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+        (attn): Attention(
+          (qkv): Linear(in_features=384, out_features=1152, bias=False)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=384, out_features=384, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+        )
+        (drop_path): Identity()
+        (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+        (mlp): Mlp(
+          (fc1): Linear(in_features=384, out_features=1152, bias=True)
+          (act): GELU(approximate='none')
+          (fc2): Linear(in_features=1152, out_features=384, bias=True)
+          (drop): Dropout(p=0.0, inplace=False)
+        )
+      )
+    )
+    (norm): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+    (head): Linear(in_features=384, out_features=10, bias=True)
+  )
+)
+ Train accuracy: 24.4%, Avg loss: 0.070652, lr: 8e-05
+ Test accuracy: 59.2%, Avg loss: 2.130661

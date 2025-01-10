@@ -1,0 +1,9 @@
+#pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
+pip3 install -r requirements.txt
+
+pip3 install mmcv-full==1.4.7 mmsegmentation==0.24.0
+pip install mmengine
+pip install scipy timm
+git clone https://github.com/zbwxp/SegVit segvit
+git clone https://github.com/facebookresearch/deit deit
